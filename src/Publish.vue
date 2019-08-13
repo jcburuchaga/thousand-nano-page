@@ -153,7 +153,7 @@ export default {
     },
     async checkDeposit(ac) { 
       setInterval(async function () {
-         let x = await axios.post('http://173.212.192.225:5000/v1/check_deposit', {
+         let x = await axios.post('https://api.nanopixelwall.com/v1/check_deposit', {
            acc : ac
          })
                 .then(function (response) {
@@ -200,7 +200,7 @@ export default {
           return false;
       }
       var account = "";  
-      let x = await axios.post('http://173.212.192.225:5000/v1/ad', { 
+      let x = await axios.post('https://api.nanopixelwall.com/v1/ad', { 
                     x : this.$store.state.previewAd.x,
                     y : this.$store.state.previewAd.y,
                     width : this.$store.state.previewAd.width,

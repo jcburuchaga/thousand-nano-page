@@ -25,7 +25,7 @@
       <div style="background-color:#000034;border-radius:0.2em">      
         <p style="text-align:center">Loading Collage!... </p>
       </div>
-    <div class="adGrid" style="background-image:url('http://173.212.192.225/img/loading.gif');background-size:cover;"></div>
+    <div class="adGrid" style="background-image:url('https://nanopixelwall.com/img/loading.gif');background-size:cover;"></div>
   </template>
     <PublishModal
       v-show="isModalVisible"

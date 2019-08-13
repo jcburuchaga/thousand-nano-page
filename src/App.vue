@@ -5,7 +5,7 @@
      <table>  
      <tr>
      <td>
-     <a href="https://nano.org/" target="_blank"><img  style="height: 120px" src="http://173.212.192.225/img/nano_full_hi-res.png" alt="Nano the feeless, fast, and green!" /></a>
+     <a href="https://nano.org/" target="_blank"><img  style="height: 120px" src="https://nanopixelwall.com/img/nano_full_hi-res.png" alt="Nano the feeless, fast, and green!" /></a>
      </td> 
      </tr>
    </table>
@@ -49,8 +49,8 @@ export default {
       'owners': false,
       'isReadOnly': false, 
       'prerendered': {
-      image:  "http://173.212.192.225:5000/main_ads.png",
-      data: 'http://173.212.192.225:5000/v1/ad', 
+      image:  "https://api.nanopixelwall.com/main_ads.png",
+      data: 'https://api.nanopixelwall.com/v1/ad', 
       loadRemoteImages: true
       },
     }
