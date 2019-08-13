@@ -82,8 +82,7 @@ input {
         <label>
           <span>Image</span>
           <div class="my-8">
-            <img ref="imgPrev" src=""
-    width="10" height="10" />
+            <img ref="imgPrev" src="" width="10" height="10" />
      <input id="file_mov" type="file" @change="onFileChange">
     </div>
         </label>
@@ -179,7 +178,7 @@ export default {
     price() {
       // Round up to the nearest 0.01
       // TODO: BigNumber?
-      return Math.ceil(this.$store.state.previewAd.height * this.$store.stateAd.width * 0.0001 * 100) / 100;
+      return Math.ceil(this.$store.state.previewAd.height * this.$store.state.previewAd.width * 0.0001  * 100) / 100;
     },
     async publish() {  
       if(this.$refs.imgPrev.src == null)
@@ -199,7 +198,8 @@ export default {
           alert('verify your url!, is not valid...');
           return false;
       }
-      var account = "";  
+      var account = "";   
+      
       let x = await axios.post('https://api.nanopixelwall.com/v1/ad', { 
                     x : this.$store.state.previewAd.x,
                     y : this.$store.state.previewAd.y,
@@ -215,7 +215,7 @@ export default {
                     {
                       alert("sorry, we cant publish that!")
                       return false;
-                    }
+                    } 
                     account = response.data.account;
                    
                 })
