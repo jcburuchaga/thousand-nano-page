@@ -5,7 +5,7 @@
      <table>  
      <tr>
      <td>
-     <a href="https://nano.org/" target="_blank"><img  style="height: 120px" src="http://173.212.192.225/nano_full_hi-res.png" alt="Nano the feeless, fast, and green!" /></a>
+     <a href="https://nano.org/" target="_blank"><img  style="height: 120px" src="http://173.212.192.225/img/nano_full_hi-res.png" alt="Nano the feeless, fast, and green!" /></a>
      </td> 
      </tr>
    </table>
