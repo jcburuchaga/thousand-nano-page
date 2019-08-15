@@ -104,12 +104,9 @@ input {
       {{ error }}
     </p>
     <div v-if="pay" >
-      to publish your photo art! transfer {{price()+ this.$store.state.monthsToBuy}} NANO to address
+      to publish your photo art! transfer {{price() * this.$store.state.monthsToBuy}} NANO to address
        <hr>
-      <center><qrcode-vue style="background-color:white;border-radius:0.2em;padding-top:10px;padding-bottom:10px" :value="'nano:'+account+'?amount='+this.priceRaw()" size="100"  level="M" /> 
-      <qrcode-vue style="background-color:white;border-radius:0.2em;padding-top:10px;padding-bottom:10px"  :value="'nano:'+account+'?amount='+this.priceRaw()" size="100"  level="L" /> 
-      <qrcode-vue  style="background-color:white;border-radius:0.2em;padding-top:10px;padding-bottom:10px"  :value="'nano:'+account+'?amount='+this.priceRaw()" size="100"  level="Q" /> 
-      <qrcode-vue  style="background-color:white;border-radius:0.2em;padding-top:10px;padding-bottom:10px"  :value="'nano:'+account+'?amount='+this.priceRaw()" size="100"  level="H" /> 
+      <center><qrcode-vue style="background-color:white;border-radius:0.2em;padding-top:10px;padding-bottom:10px" :value="'nano:'+account+'?amount='+this.priceRaw()" size="100"  level="M" />  
        <small>{{account}}</small></center>
     </div>
   </div>
@@ -180,7 +177,7 @@ export default {
     },
      priceRaw() {
       const BigNumber = require('bignumber.js');
-      let mvalue = (this.price()+ this.$store.state.monthsToBuy)*10;
+      let mvalue = (this.price() * this.$store.state.monthsToBuy)*10;
       const value = BigNumber(mvalue.toString()); 
       return value.shiftedBy(29).toString(10); 
     },

@@ -5,7 +5,13 @@
      <table>  
      <tr>
      <td>
-     <a href="https://nano.org/" target="_blank"><img  style="height: 120px" src="https://nanopixelwall.com/img/nano_full_hi-res.png" alt="Nano the feeless, fast, and green!" /></a>
+     <a href="https://nano.org/" target="_blank"><img  style="height: 120px" src="https://nanopixelwall.com/img/nano_full_hi-res.png" alt="Nano the feeless, fast, and green!" @click="showMain" /></a>
+     </td> 
+     <td>
+     <input type="button" class="banbtnmenu" style="color:#000034" value="Wall" @click="showMain" />
+     </td> 
+     <td>
+     <input type="button" class="banbtnmenu" style="color:#000034" value="Rules" @click="showRules" />
      </td> 
      </tr>
    </table>
@@ -15,7 +21,7 @@
       <br/>
       
        </header>
-<template v-if="ready">
+<template v-if="main">
 <div style="background-color:#000034;border-radius:0.2em;">      
 <br />
         <p style="margin:10px">How does it work?</p> 
@@ -28,9 +34,28 @@ Once you have decided on an area you chose a title, a web address and an image. 
         {{$store.state.adsPixels}} pixels sold <button class="banbtn" v-on:click="$store.commit('updatePreview', {x: 20, y: 20})" v-if="!$store.state.previewAd">Buy Pixels</button>
       </div>  
       <Homepage :prerendered="prerendered"></Homepage> 
-    <div class="sold" v-if="ready">
+    <div class="sold" v-if="main">
       {{$store.state.adsPixels}} pixels sold <button class="banbtn" v-on:click="$store.commit('updatePreview', {x: 20, y: 920})" v-if="!$store.state.previewAd">Buy Pixels</button>
     </div>
+</template> 
+<template v-if="rules">
+<div style="background-color:#000034;border-radius:0.2em;">      
+<br />
+        <p style="margin:10px">NanoPixelWall </p> 
+        <p style="margin:10px">This websitsite is in BETA and is currently being developed and improved. If you notice any issues mention them.</p>
+        <p style="margin:10px">Do not submit items that are unlawful, harassing, abusive, threatening, harmful, obscene, profane, sexually orientated or racially offensive. It will be removed with no refund.</p>
+        <p style="margin:10px">Have fun and don't be dumb.</p>
+        <p style="margin:10px">Only send the amount of nano requested. sending the wrong amount could result in funds being lost and possibly losing your selected space.</p>
+        <p style="margin:10px">Our Service will contain links to third-party web sites or services that are not owned or controlled by NanoPixelWall. </p>
+        <p style="margin:10px">NanoPixelWall holds no responsibility for, the content, privacy policies, or practices of any third party web sites or services. You further acknowledge and agree that NanoPixelWall shall not be responsible or liable, directly or indirectly, for any damage or loss caused or alleged to be caused by or in connection with use of or reliance on any such content, goods or services available on or through any such web sites or services. </p>
+        <p style="margin:10px">Our Service allows you to post, link, store, share and otherwise make available certain information, text, graphics, videos, or other material ("Content"). The poster of said content is responsible for the upkeep and security of external websites linked.</p>
+        <p style="margin:10px">Developed by - jcburuchaga <br />
+Powered by - NanoIsSuperior
+ <br />
+  <br /></p>
+
+      </div>
+ 
 </template> 
     <footer> 
     </footer>
@@ -45,14 +70,24 @@ export default {
   name: 'app',  
   data() {
     return { 
-      'ready': true,
-      'owners': false,
+      'rules': false,
+      'main': true,
       'isReadOnly': false, 
       'prerendered': {
       image:  "https://api.nanopixelwall.com/main_ads.png",
       data: 'https://api.nanopixelwall.com/v1/ad', 
       loadRemoteImages: true
       },
+    }
+  },
+  methods: {
+    showRules(){
+      this.main = false;
+      this.rules = true;
+    },
+    showMain(){
+      this.rules = false;
+      this.main = true;
     }
   },
   components: {

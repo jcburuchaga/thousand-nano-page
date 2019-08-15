@@ -29,7 +29,7 @@
       {{$parent.width}}x{{$parent.height}} = {{ $parent.width * $parent.height }} pixels at position ({{$parent.left}}, {{$parent.top}}).
     </div>
     <div>
-      Price: {{price($parent.width, $parent.height) + this.$store.state.monthsToBuy}} NANO.
+      Price: {{price($parent.width, $parent.height) * this.$store.state.monthsToBuy}} NANO.
     </div>
 
     <p v-if="error" class="error">{{error}}</p>
