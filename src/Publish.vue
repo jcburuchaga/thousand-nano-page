@@ -104,9 +104,12 @@ input {
       {{ error }}
     </p>
     <div v-if="pay" >
-      to publish your photo art! transfer {{price()}} NANO to address
+      to publish your photo art! transfer {{price()+ this.$store.state.monthsToBuy}} NANO to address
        <hr>
-      <center><qrcode-vue :value="account" size="100"  level="M"></qrcode-vue>
+      <center><qrcode-vue style="background-color:white;border-radius:0.2em;padding-top:10px;padding-bottom:10px" :value="'nano:'+account+'?amount='+this.priceRaw()" size="100"  level="M" /> 
+      <qrcode-vue style="background-color:white;border-radius:0.2em;padding-top:10px;padding-bottom:10px"  :value="'nano:'+account+'?amount='+this.priceRaw()" size="100"  level="L" /> 
+      <qrcode-vue  style="background-color:white;border-radius:0.2em;padding-top:10px;padding-bottom:10px"  :value="'nano:'+account+'?amount='+this.priceRaw()" size="100"  level="Q" /> 
+      <qrcode-vue  style="background-color:white;border-radius:0.2em;padding-top:10px;padding-bottom:10px"  :value="'nano:'+account+'?amount='+this.priceRaw()" size="100"  level="H" /> 
        <small>{{account}}</small></center>
     </div>
   </div>
@@ -115,7 +118,7 @@ input {
 <script>
 import Ad from './Ad.vue'
 import axios from 'axios'
-import QrcodeVue from 'qrcode.vue';
+import QrcodeVue from 'qrcode.vue'; 
 
 export default { 
   data() {
@@ -175,10 +178,14 @@ export default {
       this.image = null;
       this.$emit("cancelModal");
     },
-    price() {
-      // Round up to the nearest 0.01
-      // TODO: BigNumber?
-      return Math.ceil(this.$store.state.previewAd.height * this.$store.state.previewAd.width * 0.0001  * 100) / 100;
+     priceRaw() {
+      const BigNumber = require('bignumber.js');
+      let mvalue = (this.price()+ this.$store.state.monthsToBuy)*10;
+      const value = BigNumber(mvalue.toString()); 
+      return value.shiftedBy(29).toString(10); 
+    },
+    price() { 
+      return (Math.ceil(this.$store.state.previewAd.height * this.$store.state.previewAd.width * 0.0001  * 100) / 100);
     },
     async publish() {  
       if(this.$refs.imgPrev.src == null)
@@ -208,7 +215,8 @@ export default {
                     title : this.$refs.ad_title.value,
                     link : this.$refs.ad_link.value,
                     image_base_64 : this.image.split(',')[1],
-                    image_type : this.image.split(',')[0]
+                    image_type : this.image.split(',')[0],
+                    period: this.$store.state.monthsToBuy
                 })
                 .then(function (response) {
                     if(response.data.account == "" || response.data.account == null )
@@ -222,7 +230,7 @@ export default {
                 .catch(function (error) { 
                     alert("sorry, we cant upload your photo")
                     return false;
-                });
+                }); 
                 this.account = account;
                 this.formIsHidden = true;
                 this.pay = true;
@@ -232,7 +240,7 @@ export default {
     },
   },
   components: {
-    Ad,
+    Ad, 
     QrcodeVue
   },
 }

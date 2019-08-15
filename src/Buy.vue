@@ -29,13 +29,21 @@
       {{$parent.width}}x{{$parent.height}} = {{ $parent.width * $parent.height }} pixels at position ({{$parent.left}}, {{$parent.top}}).
     </div>
     <div>
-      Price: {{price($parent.width, $parent.height)}} NANO.
+      Price: {{price($parent.width, $parent.height) + this.$store.state.monthsToBuy}} NANO.
     </div>
 
     <p v-if="error" class="error">{{error}}</p>
     <p v-else-if="success" class="success">{{success}}</p>
      
     <p v-else-if="isAvailable"> 
+      <select ref="period" class="form-control" @change="updateMonth">
+      <option value="1">1 Month</option>
+      <option value="2">2 Month</option>
+      <option value="3">3 Month</option>
+      <option value="4">4 Month</option>
+      <option value="5">5 Month</option>
+      <option value="6">6 Month</option>
+    </select>
       <strong>Slot is available.</strong>
       <button class="banbtn" v-on:click="buy" v-bind:disabled="isReadOnly" v-if="this.$store.state.activeAccount">Buy Pixels</button> 
       <button class="banbtn" v-on:click="checkAccounts" v-else>Buy</button>
@@ -68,9 +76,10 @@ export default {
     }
   },
   methods: {
-    price(height, width) {
-      // Round up to the nearest 0.01
-      // TODO: BigNumber?
+    updateMonth() {  
+      this.$store.state.monthsToBuy = parseInt(this.$refs.period.value);
+    },
+    price(height, width) { 
       return Math.ceil(height * width * nanoPerPixel * 100) / 100;
     },
     checkAccounts() {      
@@ -81,6 +90,10 @@ export default {
       const y1 = Math.floor(y/10);
       const x2 = x1 + Math.floor(width/10) - 1;
       const y2 = y1 + Math.floor(height/10) - 1;
+      if(width*height > 40000)
+      { 
+        return false;
+      }
       return !this.$store.getters.isColliding(x1, y1, x2, y2);
     },
   }

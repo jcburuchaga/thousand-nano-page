@@ -69,6 +69,7 @@ export default new Vuex.Store({
     grid: null, // lazy load
     previewAd: null,
     gridVis: true,
+    monthsToBuy: 1
   },
   mutations: {
     updatePreview(state, ad) {
