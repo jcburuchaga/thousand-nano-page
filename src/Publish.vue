@@ -225,13 +225,15 @@ export default {
                    
                 })
                 .catch(function (error) { 
-                    alert("sorry, we cant upload your photo")
+                    alert("sorry, we cant upload, check large of your image.")
                     return false;
                 }); 
-                this.account = account;
-                this.formIsHidden = true;
-                this.pay = true;
-                this.checkDeposit(account);
+                if (account != "" && account != null) {
+                  this.account = account;
+                  this.formIsHidden = true;
+                  this.pay = true;
+                  this.checkDeposit(account);
+                }                
       }
       return false;
     },
