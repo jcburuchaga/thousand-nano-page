@@ -1,11 +1,3 @@
-# BAN MILLION HOMEPAGE
+# NANO Pixelwall
 
-> Million BANANO Homepage
-
-## Build Setup
-
-``` bash
-# run in development mode
-make run
-```
-
+> NANO Pixelwall
