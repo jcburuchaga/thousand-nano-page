@@ -1,3 +1,4 @@
-# NANO Pixelwall
+# NANO Pixelwall made with VueJS
 
-> NANO Pixelwall
+> www.nanopixelwall.com
+ 
